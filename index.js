@@ -31,21 +31,23 @@
 // Purpose:
 // Help teachers retrieve and analyze student performance efficiently.
 
-
-const express = require('express');
-const { resolve } = require('path');
+const express = require("express");
+const { resolve } = require("path");
+const studentsRoute = require("./routes/studentsRoute.js");
 
 const app = express();
 const port = 3010;
 
-app.use(express.static('static'));
+app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.sendFile(resolve(__dirname, 'pages/index.html'));
+app.use(express.static("static"));
+
+app.get("/", (req, res) => {
+  res.sendFile(resolve(__dirname, "pages/index.html"));
 });
+
+app.use("/students", studentsRoute);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
-
-
